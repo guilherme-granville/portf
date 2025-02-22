@@ -5,64 +5,139 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfólio - Guilherme Granville</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="imgs/logo gg.webp" type="image/x-icon">
 </head>
 <body>
+  <!-- Tooltip -->
+<div id="tooltip" class="tooltip">Clique para ampliar</div>
+  <div class="parallax"></div>
   <header>
+    <a href="#"><img class="logo" src="imgs/logo gg.webp" alt="logo"></a>
     <nav class="nav">
-      <a href="#home" class="nav-item is-active" active-color="white"><div></div>Home</a>
+      <a href="#" class="nav-item is-active" active-color="white"><div></div>Home</a>
       <a href="#about" class="nav-item" active-color="white"><div></div>Sobre mim</a>
       <a href="#skills" class="nav-item" active-color="white"><div></div>Linguagens</a>
       <a href="#projects" class="nav-item" active-color="white"><div></div>Projetos</a>
       <a href="#contact" class="nav-item" active-color="white"><div></div>Contato</a>
       <span class="nav-indicator"></span>
     </nav>
+    <div class="hamburger">
+      <div class="line line1"></div>
+      <div class="line line2"></div>
+      <div class="line line3"></div>
+    </div>
   </header>
+  
 
   <main>
     <!-- Seção Home -->
-     
     <section id="home" class="intro">
-      <h1>Oi, Eu Sou <span class="highlight">Guilherme Granville</span> 👋</h1>
+      <div class="info-in">
+      <h1>Oi, Eu Sou <span class="highlight">Guilherme Granville</span><span class="emoji">👋🏻</span></h1>
       <h2>
         <span id="typing-text"></span>
       </h2>
+    </div>
+      <img src="imgs/expPink.webp" alt="mesa">
     </section>
 
     <!-- Seção Sobre Mim -->
-    <section id="about" class="section">
+    <section id="about" class="section about">
       <div class="container">
         <h2>Sobre Mim</h2>
-        <p>Sou desenvolvedor apaixonado por criar interfaces dinâmicas, funcionais e atraentes. Tenho experiência com tecnologias como HTML, CSS, JavaScript e frameworks modernos.</p>
+        <div class="code-container">
+          <div class="window-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+        <pre class="code-box">
+        <code>
+  <span class="keyword">const</span> <span class="boolean">coder</span> <span class="keyword">=</span> {
+  nome<span class="keyword">:</span> <span class="string">'Guilherme Granville'</span>,
+  Habilidades<span class="keyword">: [</span>
+      <span class="string">'HTML5'</span>, 
+      <span class="string">'CSS3'</span>, 
+      <span class="string">'Javascript'</span>, 
+      <span class="string">'PHP'</span>, 
+      <span class="string">'MySql'</span>
+      <span class="keyword">]</span>,
+  TrabalhoDuro<span class="keyword">:</span> <span class="boolean">true</span>,
+  aprendizadoRapido<span class="keyword">:</span> <span class="boolean">true</span>,
+  solucionadorDeProblemas<span class="keyword">:</span> <span class="boolean">true</span>,
+  Descrição<span class="keyword">:</span> <span class="string">    
+    "Desenvolvedor iniciante apaixonado por tecnologia, com sólida base em linguagens como 
+    JavaScript e desenvolvimento web. Atualmente cursando Técnico em Desenvolvimento de 
+    Sistemas, busco uma posição onde possa aplicar minhas habilidades em projetos 
+    inovadores e colaborar com outras pessoas."</span>
+};</code>
+          </pre>
+        </div>
       </div>
     </section>
 
     <!-- Seção de Habilidades -->
-    <section id="skills" class="section">
+    <section id="skills" class="section skills">
       <div class="container">
         <h2>Minhas Habilidades</h2>
         <div class="skills-grid">
-          <div class="skill">HTML</div>
-          <div class="skill">CSS</div>
-          <div class="skill">JavaScript</div>
-          <div class="skill">React</div>
-          <div class="skill">Git</div>
-          <div class="skill">Figma</div>
+          <div class="skill"><img src="imgs/skills/html.svg" alt="HTML"></div>
+          <div class="skill"><img src="imgs/skills/css.svg" alt="CSS"></div>
+          <div class="skill"><img src="imgs/skills/javascript.svg" alt="JavaScript"></div>
+          <div class="skill"><img src="imgs/skills/php.svg" alt="PHP"></div>
+          <div class="skill"><img src="imgs/skills/mysql.svg" alt="MySql"></div>
+          <div class="skill"><img src="imgs/skills/react.svg" alt="react"></div>
         </div>
       </div>
     </section>
 
     <!-- Seção de Projetos -->
-    <section id="projects" class="section">
+    <section id="projects" class="section projects">
       <div class="container">
         <h2>Meus Projetos</h2>
         <div class="projects-grid">
+
           <div class="project-card">
-            <h3>Projeto 1</h3>
+            <h3>Site do Centro Estadual de Educação Profissional de Cianorte</h3>
+            <img class="project-image" src="imgs/projects/project1.png" alt="Projeto 1" 
+            onmouseover="showTooltip(event)" 
+            onmousemove="moveTooltip(event)"
+            onmouseout="hideTooltip()"
+            onclick="openModal(this)">        
+            <p>O site foi criado para ser o site principal do CEEP Cianorte e para compartilhar informações sobre o centro e seus cursos, além de ter sido um trabalho de um evento de amostra do colégio chamado "Conexão CEEP" que acontece anualmente. Esse projeto foi feito com HTML, CSS e JavaScript.</p>
+            <a href="https://ceepcianorte.com.br" target="_blank">Ver Projeto</a>
+          </div>
+          <div id="modal" class="modal" onclick="closeModal()">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImg" src="" alt="Imagem Ampliada">
+        </div>
+
+          <div class="project-card">
+            <h3>Sarte Cianorte – Emergências Médicas</h3>
+            <img class="project-image" src="imgs/projects/project2.png" alt="Projeto 2" 
+            onmouseover="showTooltip(event)" 
+            onmousemove="moveTooltip(event)"
+            onmouseout="hideTooltip()"
+            onclick="openModal(this)">
+        
+            <p>O site da Sarte Cianorte foi desenvolvido para apresentar os serviços de emergência médica oferecidos pela empresa, incluindo transporte em ambulâncias de suporte básico e avançado, atendimento especializado em eventos e cursos de capacitação como instrumentista, cuidador de idosos e socorrista resgatista.<br>
+              A plataforma conta com um design responsivo, um sistema de inscrições para os cursos e informações detalhadas sobre os serviços.</p>
+            <a href="https://sartecianorte.com.br" target="_blank">Ver Projeto</a>
+          </div>
+          <div id="modal" class="modal" onclick="closeModal()">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImg" src="" alt="Imagem Ampliada">
+        </div>
+
+          <div class="project-card">
+            <h3>Projeto 3</h3>
+            <img class="project-image" src="imgs/projects/project3.png" alt="Projeto 3">
             <p>Descrição do projeto. Detalhes sobre o que foi implementado.</p>
             <a href="#" target="_blank">Ver Projeto</a>
           </div>
           <div class="project-card">
-            <h3>Projeto 2</h3>
+            <h3>Projeto 3</h3>
+            <img class="project-image" src="imgs/projects/project3.png" alt="Projeto 3">
             <p>Descrição do projeto. Detalhes sobre o que foi implementado.</p>
             <a href="#" target="_blank">Ver Projeto</a>
           </div>
@@ -71,7 +146,7 @@
     </section>
 
     <!-- Seção Contato -->
-    <section id="contact" class="section">
+    <section id="contact" class="section contact">
       <div class="container">
         <h2>Entre em Contato</h2>
         <form class="contact-form">
@@ -83,6 +158,7 @@
       </div>
     </section>
   </main>
+
 
   <script src="script.js"></script>
 </body>
