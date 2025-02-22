@@ -93,3 +93,17 @@ function moveTooltip(event) {
 function hideTooltip() {
   document.getElementById("tooltip").style.display = "none";
 }
+
+
+
+
+setTimeout(() => {
+  const loader = document.getElementById("loader");
+  loader.style.transition = "opacity 0.5s ease-out";
+  loader.style.opacity = "0";
+  setTimeout(() => {
+    loader.style.display = "none";
+  }, 500);
+}, 2000);
+
+
