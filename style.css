@@ -132,6 +132,7 @@ header {
   transition: all 0.4s ease;
 }
 
+
 /* Menu hambúrguer */
 .hamburger {
   position: absolute;
@@ -192,7 +193,7 @@ header {
 } 
 
 /* Seção de introdução */
-.intro {
+.intro  {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -233,6 +234,25 @@ header {
   overflow: hidden;
   display: inline-block;
   animation: piscar-cursor 0.8s step-end infinite;
+}
+
+.btn-cv {
+  font-family: "Fira Code", sans-serif;
+  background-color: #ff79c6;
+  color: #ffffff;
+  padding: 10px 20px;
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: relative;
+  margin-top: 20px;
+  display: inline-block;
+  
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 @keyframes piscar-cursor {
@@ -281,6 +301,7 @@ header {
   font-size: 2.8rem;
   color: #ff79c6;
   margin-bottom: 20px;
+  margin-top: 100px;
 }
 
 .section p {
@@ -357,7 +378,7 @@ header {
 }
 
 .project-card p {
-  font-size: 1rem;
+  font-size: clamp(.5rem, 1rem, 2rem);
   color: #d4d4d4;
   margin-bottom: 15px;
 }
@@ -703,9 +724,6 @@ code .operator {
 }
 /* Responsividade */
 @media (max-width: 1024px) {
-  .container p {
-    font-size: 1.5rem;
-  }
   .logo {
     width: 40px;
     height: 40px;
@@ -777,9 +795,7 @@ code .operator {
 }
 
 @media (max-width: 768px) {
-  .container p {
-    font-size: 1.4rem;
-  }
+
 
   header {
     padding: 10px 0;
@@ -829,9 +845,7 @@ code .operator {
 }
 
 @media (max-width: 480px) {
-  .container p {
-    font-size: 1.1rem;
-  }
+
   .logo {
     width: 30px;
     height: 30px;

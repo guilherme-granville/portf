@@ -1,30 +1,44 @@
 const indicator = document.querySelector('.nav-indicator');
 const items = document.querySelectorAll('.nav-item');
-const menuToggle = document.querySelector('.hamburger');  // Atualizado para corresponder ao nome correto
+const menuToggle = document.querySelector('.hamburger');
 const nav = document.querySelector('.nav');
 
-// Função para animar o indicador
 function handleIndicator(el) {
+  if (!el) return;
+
   items.forEach(item => {
     item.classList.remove('is-active');
     item.removeAttribute('style');
   });
 
-  indicator.style.width = `${el.offsetWidth}px`;
-  indicator.style.left = `${el.offsetLeft}px`;
-  indicator.style.backgroundColor = el.getAttribute('active-color');
+  if (el.offsetWidth !== undefined && el.offsetLeft !== undefined) {
+    indicator.style.width = `${el.offsetWidth}px`;
+    indicator.style.left = `${el.offsetLeft}px`;
+    indicator.style.backgroundColor = el.getAttribute('active-color');
 
-  el.classList.add('is-active');
-  el.style.color = el.getAttribute('active-color');
+    el.classList.add('is-active');
+    el.style.color = el.getAttribute('active-color');
+  }
 }
 
-// Adicionando evento nos itens do menu
 items.forEach(item => {
-  item.addEventListener('click', e => handleIndicator(e.target));
-  item.classList.contains('is-active') && handleIndicator(item);
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    handleIndicator(e.target);
+
+    const targetId = e.target.getAttribute('href').substring(1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  if (item.classList.contains('is-active')) {
+    handleIndicator(item);
+  }
 });
 
-// Animação de digitação
 const typingText = document.getElementById('typing-text');
 const words = ['Desenvolvedor Front-end', 'Freelancer', 'Entusiasta de Design', 'Apaixonado por Tecnologia'];
 let wordIndex = 0;
@@ -54,48 +68,30 @@ function typeEffect() {
 
 typeEffect();
 
-// Menu responsivo
 menuToggle.addEventListener('click', () => {
-  // Alterna as classes active no botão e open na navegação
   menuToggle.classList.toggle('active');
-  nav.classList.toggle('active');  // Corrigido de 'open' para 'active' para corresponder ao CSS
+  nav.classList.toggle('active');
 });
 
+function updateActiveNavItem() {
+  const sections = document.querySelectorAll('section');
+  const scrollPosition = window.scrollY;
 
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 50;
+    const sectionBottom = sectionTop + section.offsetHeight;
 
-function openModal(element) {
-  document.getElementById("modalImg").src = element.src;
-  document.getElementById("modal").classList.add("show");
-  document.body.classList.add("no-scroll"); // Bloqueia rolagem
+    const link = document.querySelector(`.nav-item[href="#${section.id}"]`);
+
+    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+      handleIndicator(link);
+    }
+  });
 }
 
-function closeModal() {
-  document.getElementById("modal").classList.remove("show");
-  document.body.classList.remove("no-scroll"); // Libera rolagem
-}
+window.addEventListener('scroll', updateActiveNavItem);
 
-
-
-function showTooltip(event) {
-  const tooltip = document.getElementById("tooltip");
-  tooltip.style.display = "block";
-  moveTooltip(event); // Garante que a posição inicial esteja certa
-}
-
-function moveTooltip(event) {
-  const tooltip = document.getElementById("tooltip");
-  let x = event.pageX + 15; // Posiciona ao lado do cursor
-  let y = event.pageY + 10; // Ajuste vertical
-  tooltip.style.left = x + "px";
-  tooltip.style.top = y + "px";
-}
-
-function hideTooltip() {
-  document.getElementById("tooltip").style.display = "none";
-}
-
-
-
+updateActiveNavItem();
 
 setTimeout(() => {
   const loader = document.getElementById("loader");
@@ -105,5 +101,35 @@ setTimeout(() => {
     loader.style.display = "none";
   }, 500);
 }, 2000);
+
+function openModal(element) {
+  document.getElementById("modalImg").src = element.src;
+  document.getElementById("modal").classList.add("show");
+  document.body.classList.add("no-scroll");
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.remove("show");
+  document.body.classList.remove("no-scroll");
+}
+
+function showTooltip(event) {
+  const tooltip = document.getElementById("tooltip");
+  tooltip.style.display = "block";
+  moveTooltip(event);
+}
+
+function moveTooltip(event) {
+  const tooltip = document.getElementById("tooltip");
+  let x = event.pageX + 15;
+  let y = event.pageY + 10;
+  tooltip.style.left = x + "px";
+  tooltip.style.top = y + "px";
+}
+
+function hideTooltip() {
+  document.getElementById("tooltip").style.display = "none";
+}
+
 
 
